@@ -3,6 +3,7 @@ package com.dubion.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.dubion.domain.Album;
 import com.dubion.domain.Song;
+import com.dubion.repository.GenreRepository;
 import com.dubion.service.AlbumService;
 import com.dubion.repository.AlbumRepository;
 import com.dubion.service.DiscogsAPI.DiscogsApiService;
@@ -47,14 +48,18 @@ public class AlbumResource {
 
     private final NapsterDTOService napsterDTOService;
 
+    private final GenreRepository genreRepository;
+
+
     @Autowired
     private DiscogsApiService discogsApiService;
 
-    public AlbumResource(AlbumRepository albumRepository, AlbumService albumService, AlbumQueryService albumQueryService, NapsterDTOService napsterDTOService) {
+    public AlbumResource(AlbumRepository albumRepository, AlbumService albumService, AlbumQueryService albumQueryService, NapsterDTOService napsterDTOService, GenreRepository genreRepository) {
         this.albumRepository = albumRepository;
         this.albumService = albumService;
         this.albumQueryService = albumQueryService;
         this.napsterDTOService = napsterDTOService;
+        this.genreRepository = genreRepository;
     }
 
     /**
@@ -223,7 +228,19 @@ public class AlbumResource {
     }
 
     @GetMapping("/albums/by-name/{albumName}")
+    @Timed
     public List<Album> getAlbumByName(@PathVariable String albumName){
         return albumRepository.findByNameContaining(albumName);
     }
+
+    //@GetMapping("/albums/byGenre/{id}")
+    //@Timed
+    //public List<Album> getAlbumsByGenre(@PathVariable Long id){
+    //    return albumRepository.findByGenresId(id);
+    //}
+    //@GetMapping("/albums/byGenre/{id}")
+    //@Timed
+    //public List<Album> getAlbumsByGenre(@PathVariable Long id){
+    //    return albumRepository.findByGenres(genreRepository.findById(id));
+    //}
 }

@@ -23,4 +23,7 @@ public interface GenreRepository extends JpaRepository<Genre, Long> {
     @Query("select a from Genre a where a.name=:name")
     Set<Genre> findByNames(@Param("name")String name);
 
+    @Query("select a from Genre a where a.id=:id")
+    Genre findById(@Param("id")Long id);
+
 }

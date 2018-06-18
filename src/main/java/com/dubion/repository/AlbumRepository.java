@@ -1,6 +1,7 @@
 package com.dubion.repository;
 
 import com.dubion.domain.Album;
+import com.dubion.domain.Genre;
 import com.dubion.domain.Song;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -42,4 +43,10 @@ public interface AlbumRepository extends JpaRepository<Album, Long>, JpaSpecific
 
     @Query("SELECT a FROM Album a WHERE a.band.id = :id")
     List<Album> findByBandId(@Param("id") Long id);
+
+    //@Query("SELECT a FROM Album a WHERE a.genres.id = :id")
+    //List<Album> findByGenresId(@Param("id") Long id);
+
+    //@Query("SELECT a FROM Album a WHERE a.genres = :genre")
+    //List<Album> findByGenres(@Param("genre") Genre genre);
 }

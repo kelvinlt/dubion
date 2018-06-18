@@ -2,6 +2,8 @@ package com.dubion.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.dubion.domain.Album;
+import com.dubion.domain.CounterRatings;
+import com.dubion.domain.MediaAlbum;
 import com.dubion.domain.RatingAlbum;
 import com.dubion.repository.UserRepository;
 import com.dubion.security.SecurityUtils;
@@ -178,15 +180,15 @@ public class RatingAlbumResource {
 
     @GetMapping("/rating-albums/counterRating/{id}")
     @Timed
-    public ResponseEntity<Integer> getCounterRating(@PathVariable Long id){
-        Integer contador = Math.toIntExact(ratingAlbumRepository.counterRating(id));
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(contador));
+    public ResponseEntity<CounterRatings> getCounterRating(@PathVariable Long id){
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(new CounterRatings(ratingAlbumRepository.counterRating(id))));
     }
 
     @GetMapping("/rating-albums/mediaRating/{id}")
     @Timed
-    public ResponseEntity<Double> getMediaRating(@PathVariable Long id){
+    public ResponseEntity<MediaAlbum> getMediaRating(@PathVariable Long id){
         Double media = ratingAlbumRepository.mediaRating(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(media));
+        MediaAlbum mediaAlbum = new MediaAlbum(media);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(mediaAlbum));
     }
 }

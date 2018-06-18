@@ -183,10 +183,14 @@
         vm.salbums=[];
 
         function songByName(){
-            console.log("-------------------------------------------------------------------------------------------"+vm.albumId);
+            console.log("-------------------------------------------------------------------------------------------: "+vm.albumId);
+            RatingAlbum.getContador({id : vm.albumId}, function (data) {
+                vm.contadorRating = data.value;
+                console.dir(data);
+            });
             RatingAlbum.getMedia({id : vm.albumId}, function (data) {
-                vm.mediaRating = data;
-                console.log("-------------------------------------------------------------------------------------------: "+data);
+                vm.mediaRating = data.value;
+                console.dir(data);
             });
 
             Album.getSongsByName({idAlbum : vm.albumId}, function (data) {
