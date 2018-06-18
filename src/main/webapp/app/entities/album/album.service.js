@@ -14,6 +14,7 @@
             'queryByName': { method: 'GET', isArray: true, url: '/api/albums/search/:name'},
             'getSongsByName': { method: 'GET', isArray: true, url: 'api/songs/:idAlbum/albums-song'},
             'getSongsByIdPageble' : {method: 'GET', isArray: true, url: 'api/albums/:idAlbum/page/:page'},
+            'getAlbumsByGenreId' : {method: 'GET', isArray: true, url: 'api/albums/byGenre/:id'},
             'querytop' : {method: 'GET', isArray: true, url: 'api/albums/top2'},
             'queryNew' : {method: 'GET', isArray: true, url: 'api/albumsNew'},
             'get': {

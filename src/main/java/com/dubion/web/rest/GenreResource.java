@@ -146,4 +146,12 @@ public class GenreResource {
         genreRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/genres/getAllGenresK")
+    @Timed
+    public ResponseEntity<List<Genre>> getAllGenresK(){
+        List<Genre> getAllGenres = genreRepository.findAllGenres();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(getAllGenres));
+    }
+
 }

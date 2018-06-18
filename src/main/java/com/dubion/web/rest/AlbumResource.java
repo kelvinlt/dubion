@@ -233,14 +233,17 @@ public class AlbumResource {
         return albumRepository.findByNameContaining(albumName);
     }
 
-    //@GetMapping("/albums/byGenre/{id}")
-    //@Timed
-    //public List<Album> getAlbumsByGenre(@PathVariable Long id){
-    //    return albumRepository.findByGenresId(id);
-    //}
-    //@GetMapping("/albums/byGenre/{id}")
-    //@Timed
-    //public List<Album> getAlbumsByGenre(@PathVariable Long id){
-    //    return albumRepository.findByGenres(genreRepository.findById(id));
-    //}
+//    @GetMapping("/albums/byGenre/{id}")
+//    @Timed
+//    public ResponseEntity<List<Album>> getAlbumsByGenre(@PathVariable Long id){
+//        List<Album> albumsByGenre = albumRepository.findByGenresId(id);
+//
+//        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(albumsByGenre));
+//    }
+    @GetMapping("/albums/byGenre/{id}")
+    @Timed
+    public ResponseEntity<List<Album>> getAlbumsByGenre(@PathVariable Long id){
+        List<Album> albumsByGenre = albumRepository.findByGenres(genreRepository.findById(id));
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(albumsByGenre));
+    }
 }

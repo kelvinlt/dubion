@@ -1,8 +1,17 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="row">
+        <div ng-if="vm.genres.length > 0" ng-repeat="genre in vm.genres track by genre.id">
+            <!--<h3>{{genre.id}}</h3>-->
+            <div class="col-md-4">
+                <div ng-click="vm.changeAlbumes(genre.id)"><h3>{{genre.name}}</h3></div>
+            </div>
+        </div>
+    </div>
 
 
-
-
+    <div class="well-lg">
+        <ul ng-if="vm.albumes.length > 0" ng-repeat="album in vm.albumes track by album.id">
+            <li><a href="#/albumPage/{{album.id}}">{{album.name}}</a></li>
+        </ul>
     </div>
 </div>

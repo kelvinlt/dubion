@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -26,4 +27,6 @@ public interface GenreRepository extends JpaRepository<Genre, Long> {
     @Query("select a from Genre a where a.id=:id")
     Genre findById(@Param("id")Long id);
 
+    @Query("select a from Genre a")
+    List<Genre> findAllGenres();
 }

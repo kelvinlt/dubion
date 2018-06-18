@@ -47,6 +47,6 @@ public interface AlbumRepository extends JpaRepository<Album, Long>, JpaSpecific
     //@Query("SELECT a FROM Album a WHERE a.genres.id = :id")
     //List<Album> findByGenresId(@Param("id") Long id);
 
-    //@Query("SELECT a FROM Album a WHERE a.genres = :genre")
-    //List<Album> findByGenres(@Param("genre") Genre genre);
+    @Query("SELECT a FROM Album a WHERE :genre member of a.genres")
+    List<Album> findByGenres(@Param("genre") Genre genre);
 }

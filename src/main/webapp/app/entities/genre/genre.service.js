@@ -11,6 +11,8 @@
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
+            //'getAllGenres': { method: 'GET', isArray: true, url: 'api/genres'},
+            'getAllGenresK': { method: 'GET', isArray: true, url: 'api/genres/getAllGenresK'},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
