@@ -43,6 +43,11 @@
         vm.back = true;
         //================//
 
+        vm.mediaRating = 0;
+        vm.contadorRating = 0;
+
+        //---------------//
+
         Album.get({id : $stateParams.id}, function(data) {
 
             vm.albumActual = data;
@@ -55,6 +60,9 @@
             songsPageable();
             vm.imatgeAlbum = '<img  src="data:image/jpg;base64, '+vm.albumActual.photo+'" />';
             // $scope.apply();
+
+            //getMediaRating(data.id);
+            //getCounterRating(data.id);
 
         });
 
@@ -143,6 +151,18 @@
 
         }
 
+        function getCounterRating(id) {
+            RatingAlbum.getContador({id : id}, function (data) {
+                vm.contadorRating= data;
+            });
+        }
+
+        function getMediaRating(id) {
+            RatingAlbum.getMedia({id : id}, function (data) {
+                vm.mediaRating= data;
+            });
+        }
+
         $scope.$on('authenticationSuccess', function() {
             getAccount();
         });
@@ -163,6 +183,12 @@
         vm.salbums=[];
 
         function songByName(){
+            console.log("-------------------------------------------------------------------------------------------"+vm.albumId);
+            RatingAlbum.getMedia({id : vm.albumId}, function (data) {
+                vm.mediaRating = data;
+                console.log("-------------------------------------------------------------------------------------------: "+data);
+            });
+
             Album.getSongsByName({idAlbum : vm.albumId}, function (data) {
                 vm.songsInAlbum = data.length;
                 vm.paginasAlbum = Math.ceil(vm.songsInAlbum/10);

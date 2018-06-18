@@ -13,6 +13,8 @@
             'query': { method: 'GET', isArray: true},
             'ratingByAlbum': {method: 'GET', url: 'api/rating-albums/album/:id'},
             'setRatingByAlbum': {method: 'PUT', url: 'api/rating-albums/album/:id'},
+            'getMedia' : {method: 'GET', url: 'api/rating-albums/mediaRating/:id'},
+            'getContador' : {method: 'GET', url: 'api/rating-albums/counterRating/:id'},///rating-albums/mediaRating/{id}
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

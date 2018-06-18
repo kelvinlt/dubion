@@ -30,4 +30,10 @@ public interface RatingAlbumRepository extends JpaRepository<RatingAlbum, Long>,
     Optional<RatingAlbum> findByAlbumAndUserLogin(Album album, String login);
 
 
+    @Query("select count(rateAlbum) from RatingAlbum rateAlbum where rateAlbum.album.id=:albumId")
+    Integer counterRating(@Param("albumId") Long id);
+
+    @Query("select avg(rateAlbum.rating) from RatingAlbum rateAlbum where rateAlbum.album.id=:albumId")
+    Double mediaRating(@Param("albumId") Long id);
+
 }
