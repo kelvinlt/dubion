@@ -14,9 +14,13 @@
                     <h2 class="titleArtistAlbum"><a style="color:#333" href="#/bandPage/{{vm.albumActual.band.id}}">{{vm.albumActual.band.name}}</a>
                         - {{vm.albumActual.name}}</h2>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-4" ng-click="vm.getMediaContador()">
                     <input id="input-1" name="input-1" class="rating rating-loading" data-min="0" data-max="5"
                            data-step="1" data-show-clear="false" data-show-caption="false">
+                </div>
+                <div class="row" ng-if="vm.contadorRating > 0 && vm.mediaRating > 0">
+                    <div class="col-lg-7"></div>
+                    <div class="col-lg-5">Número de votos: {{vm.contadorRating}} <br> Media de votos: {{vm.mediaRating}}</div>
                 </div>
 
                 <div class="col-md-12 trackListAlbum">
@@ -26,7 +30,9 @@
                         </li>
                     </ul>
                     <div class="row">
-                        <div class="col-lg-4">Número de votos: {{vm.contadorRating}} <br> Media de rating: {{vm.mediaRating}}</div>
+
+
+
                         <div class="col-lg-5">
                             <div class="btn-group">
                                 <button ng-click="vm.anteriorPage()" ng-disabled="vm.back" type="button"

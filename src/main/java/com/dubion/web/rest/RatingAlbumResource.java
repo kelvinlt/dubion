@@ -178,10 +178,18 @@ public class RatingAlbumResource {
         return ratingAlbumRepository.findAlbumStats(id);
     }
 
+    //@GetMapping("/rating-albums/counterRating/{id}")
+    //@Timed
+    //public ResponseEntity<CounterRatings> getCounterRating(@PathVariable Long id){
+    //    return ResponseUtil.wrapOrNotFound(Optional.ofNullable(new CounterRatings(ratingAlbumRepository.counterRating(id))));
+    //}
+
     @GetMapping("/rating-albums/counterRating/{id}")
     @Timed
     public ResponseEntity<CounterRatings> getCounterRating(@PathVariable Long id){
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(new CounterRatings(ratingAlbumRepository.counterRating(id))));
+        int count = ratingAlbumRepository.counterRating(id);
+        CounterRatings counterRatings = new CounterRatings(count);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(counterRatings));
     }
 
     @GetMapping("/rating-albums/mediaRating/{id}")

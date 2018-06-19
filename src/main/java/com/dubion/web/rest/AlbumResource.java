@@ -240,6 +240,7 @@ public class AlbumResource {
 //
 //        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(albumsByGenre));
 //    }
+
     @GetMapping("/albums/byGenre/{id}")
     @Timed
     public ResponseEntity<List<Album>> getAlbumsByGenre(@PathVariable Long id){

@@ -67,6 +67,8 @@
         });
 
         vm.likeDislike=function(){
+            vm.getMediaRating();
+
             if(vm.likeUpDown=="s"){
                 vm.favouriteAlbum.liked=false;
                 vm.likeUpDown="r";
@@ -151,18 +153,6 @@
 
         }
 
-        function getCounterRating(id) {
-            RatingAlbum.getContador({id : id}, function (data) {
-                vm.contadorRating= data;
-            });
-        }
-
-        function getMediaRating(id) {
-            RatingAlbum.getMedia({id : id}, function (data) {
-                vm.mediaRating= data;
-            });
-        }
-
         $scope.$on('authenticationSuccess', function() {
             getAccount();
         });
@@ -184,14 +174,17 @@
 
         function songByName(){
             console.log("-------------------------------------------------------------------------------------------: "+vm.albumId);
-            RatingAlbum.getContador({id : vm.albumId}, function (data) {
-                vm.contadorRating = data.value;
-                console.dir(data);
-            });
-            RatingAlbum.getMedia({id : vm.albumId}, function (data) {
-                vm.mediaRating = data.value;
-                console.dir(data);
-            });
+            // RatingAlbum.getContador({id : vm.albumId}, function (data) {
+            //     vm.contadorRating = data.value;
+            //     console.dir(data);
+            // });
+            // RatingAlbum.getMedia({id : vm.albumId}, function (data) {
+            //     vm.mediaRating = data.value;
+            //     console.dir(data);
+            // });
+
+            vm.getContadorRating();
+            vm.getMediaRating()
 
             Album.getSongsByName({idAlbum : vm.albumId}, function (data) {
                 vm.songsInAlbum = data.length;
@@ -210,6 +203,24 @@
         };
 
 
+        vm.getMediaRating = function (){
+            RatingAlbum.getMedia({id : vm.albumId}, function (data) {
+                vm.mediaRating = data.value;
+                console.dir(data);
+            });
+        }
+
+        vm.getContadorRating = function (){
+            RatingAlbum.getContador({id : vm.albumId}, function (data) {
+                vm.contadorRating = data.value;
+                console.dir(data);
+            });
+        }
+
+        vm.getMediaContador = function (){
+            vm.getMediaRating();
+            vm.getContadorRating();
+        }
 
         function songsPageable(){
             Album.getSongsByIdPageble({idAlbum : vm.albumId,page : vm.page}, function (data){
